@@ -4,7 +4,14 @@
 //% color=#f44242 icon="\uf11b"
 namespace gamerbit {
 	function begin(): void {
-		// TODO what do those map to?
+		// Button mapping
+		// P0: D-pad up
+		// P1: D-pad left
+		// P2: D-pad right
+		// P8: D-pad down
+		// P12: left button ('X' on SNES pad)
+		// P16: right button ('Y' on SNES pad)
+		// connectors 'A' and 'B' on back side duplicate micro:bit buttons A and B.
 		pins.setPull(DigitalPin.P0, PinPullMode.PullUp);
 		pins.setPull(DigitalPin.P1, PinPullMode.PullUp);
 		pins.setPull(DigitalPin.P2, PinPullMode.PullUp);
