@@ -8,7 +8,7 @@
     },
     "files": [
         "README.md",
-        "main.ts"
+        "gamerbit.ts"
     ],
     "testFiles": [
         "test.ts"
