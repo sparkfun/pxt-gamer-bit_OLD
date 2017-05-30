@@ -1,6 +1,6 @@
 # gamebit
 
-Sparkfun Game:bit blocks
+Sparkfun Gamer:bit blocks
 
 ## License
 

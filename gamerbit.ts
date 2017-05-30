@@ -3,14 +3,18 @@
  */
 //% color=#f44242 icon="\uf11b"
 namespace gamerbit {
-	function begin(): void {
+	/**
+	 * Use once to configure the IO for the gamer:bit
+	 */
+	//% blockId=gamerbit_begin block="begin"
+	export function begin(): void {
 		// Button mapping
 		// P0: D-pad up
 		// P1: D-pad left
 		// P2: D-pad right
 		// P8: D-pad down
-		// P12: left button ('X' on SNES pad)
-		// P16: right button ('Y' on SNES pad)
+		// P12: left button ('Y')
+		// P16: right button ('X')
 		// connectors 'A' and 'B' on back side duplicate micro:bit buttons A and B.
 		pins.setPull(DigitalPin.P0, PinPullMode.PullUp);
 		pins.setPull(DigitalPin.P1, PinPullMode.PullUp);
