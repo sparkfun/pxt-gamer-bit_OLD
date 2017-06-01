@@ -1,6 +1,152 @@
 # gamebit
 
-Sparkfun Gamer:bit blocks
+TODO: To use this package, go to https://pxt.microbit.org, click ``Add package`` and search for **gamerbit**.
+
+### ~ hint
+
+Not currently integrated into pxt.  It must be manually added.  This package is still under development and subject to changes.
+
+## Usage
+
+The package adds support for the gamer:bit add-on board from SparkFun.
+
+* Button pins are named to function.
+* Provides button state detection block.
+* Runs user code on button changed events.
+* Configures pins to pull-up.
+
+### Pin names
+
+The micro:bit pins are named to match gamepad functions:
+
+* P0 -- "D-PAD up"
+* P1 -- "D-PAD left"
+* P2 -- "D-PAD right"
+* P8 -- "D-PAD down"
+* P12 -- "Y button" (right-hand, left button)
+* P16 -- "X button" (right-hand, right button)
+* P5 -- "A button" (micro:bit, left button)
+* P11 -- ""B button" (micro:bit, right button)
+
+### Initalization
+
+The button pins are automatically configured as pull-up when using the package.
+
+### Reading button states
+
+Use the logical plug-in blocks to read if the button is pressed.
+
+```blocks
+if (gamerbit.isPressed(GamerBitPin.P0)) {
+    led.plot(0, 0)
+} else {
+    led.unplot(0, 0)
+}
+```
+
+*Example turns on LED when button is pressed*
+
+### Button events
+
+Custom code can be run when a button event happens.
+
+They can be triggered on:
+
+* down (pressed)
+* up (released)
+* clicked (pressed then released)
+* double clicked
+* long click (TODO: how long is this?)
+
+```blocks
+gamerbit.onEvent(GamerBitPin.P0, GamerBitEvent.Down, () => {
+    led.plot(0, 0)
+})
+gamerbit.onEvent(GamerBitPin.P0, GamerBitEvent.Up, () => {
+    led.unplot(0, 0)
+})
+```
+
+*Example turns on LED when button is pressed*
+
+## Example: Sending a packet of data over wireless
+
+The following program assembles a string that reflects the states of the buttons and ships it out over the air.
+
+TODO: Rework this example to use the gamer:bit blocks.
+
+```blocks
+let packet = ""
+basic.forever(() => {
+    packet = ""
+    if (pins.digitalReadPin(DigitalPin.P0) == 0) {
+        led.plot(1, 0)
+        packet = "" + packet + "1"
+    } else {
+        led.unplot(1, 0)
+        packet = "" + packet + "0"
+    }
+    if (pins.digitalReadPin(DigitalPin.P1) == 0) {
+        led.plot(0, 1)
+        packet = "" + packet + "1"
+    } else {
+        led.unplot(0, 1)
+        packet = "" + packet + "0"
+    }
+    if (pins.digitalReadPin(DigitalPin.P2) == 0) {
+        led.plot(2, 1)
+        packet = "" + packet + "1"
+    } else {
+        led.unplot(2, 1)
+        packet = "" + packet + "0"
+    }
+    if (pins.digitalReadPin(DigitalPin.P8) == 0) {
+        led.plot(1, 2)
+        packet = "" + packet + "1"
+    } else {
+        led.unplot(1, 2)
+        packet = "" + packet + "0"
+    }
+    if (pins.digitalReadPin(DigitalPin.P12) == 0) {
+        led.plot(3, 2)
+        packet = "" + packet + "1"
+    } else {
+        led.unplot(3, 2)
+        packet = "" + packet + "0"
+    }
+    if (pins.digitalReadPin(DigitalPin.P16) == 0) {
+        led.plot(4, 2)
+        packet = "" + packet + "1"
+    } else {
+        led.unplot(4, 2)
+        packet = "" + packet + "0"
+    }
+    if (pins.digitalReadPin(DigitalPin.P5) == 0) {
+        led.plot(3, 0)
+        packet = "" + packet + "1"
+    } else {
+        led.unplot(3, 0)
+        packet = "" + packet + "0"
+    }
+    if (pins.digitalReadPin(DigitalPin.P11) == 0) {
+        led.plot(4, 0)
+        packet = "" + packet + "1"
+    } else {
+        led.unplot(4, 0)
+        packet = "" + packet + "0"
+    }
+    radio.sendString(packet)
+})
+pins.setPull(DigitalPin.P0, PinPullMode.PullUp)
+pins.setPull(DigitalPin.P1, PinPullMode.PullUp)
+pins.setPull(DigitalPin.P2, PinPullMode.PullUp)
+pins.setPull(DigitalPin.P8, PinPullMode.PullUp)
+pins.setPull(DigitalPin.P12, PinPullMode.PullUp)
+pins.setPull(DigitalPin.P16, PinPullMode.PullUp)
+pins.setPull(DigitalPin.P5, PinPullMode.PullUp)
+pins.setPull(DigitalPin.P11, PinPullMode.PullUp)
+radio.setGroup(13)
+```
 
 ## License
 
@@ -9,5 +155,5 @@ MIT
 ## Supported targets
 
 * for PXT/microbit
-(The metadata above is needed for package search.)
+
 
