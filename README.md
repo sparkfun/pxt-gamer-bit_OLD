@@ -19,14 +19,14 @@ The package adds support for the gamer:bit add-on board from SparkFun.
 
 The micro:bit pins are named to match gamepad functions:
 
-* P0 -- "D-PAD up"
-* P1 -- "D-PAD left"
-* P2 -- "D-PAD right"
-* P8 -- "D-PAD down"
-* P12 -- "Y button" (right-hand, left button)
-* P16 -- "X button" (right-hand, right button)
-* P5 -- "A button" (micro:bit, left button)
-* P11 -- ""B button" (micro:bit, right button)
+* P0 -- D-PAD up
+* P1 -- D-PAD left
+* P2 -- D-PAD right
+* P8 -- D-PAD down
+* P12 -- Y button (right-hand, left button)
+* P16 -- X button (right-hand, right button)
+* P5 -- A button (micro:bit, left button)
+* P11 -- B button (micro:bit, right button)
 
 ### Initalization
 
