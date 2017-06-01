@@ -4,21 +4,21 @@
 //%
 enum GamerBitPin {
 	//% block="P0 (D-PAD up)"
-	P0 = <number>DAL.MICROBIT_ID_IO_P0,
+    P0 = <number>DAL.MICROBIT_ID_IO_P0,
 	//% block="P1 (D-PAD left)"
-	P1 = DAL.MICROBIT_ID_IO_P1,
+    P1 = DAL.MICROBIT_ID_IO_P1,
 	//% block="P2 (D-PAD right)"
-	P2 = DAL.MICROBIT_ID_IO_P2,
+    P2 = DAL.MICROBIT_ID_IO_P2,
 	//% block="P8 (D-PAD down)"
-	P8 = DAL.MICROBIT_ID_IO_P8,
+    P8 = DAL.MICROBIT_ID_IO_P8,
 	//% block="P12 (Y button)"
-	P12 = DAL.MICROBIT_ID_IO_P12,
+    P12 = DAL.MICROBIT_ID_IO_P12,
 	//% block="P16 (X button)"
-	P16 = DAL.MICROBIT_ID_IO_P16,
+    P16 = DAL.MICROBIT_ID_IO_P16,
 	//% block="P5 (A button)"
-	P5 = DAL.MICROBIT_ID_IO_P5,
+    P5 = DAL.MICROBIT_ID_IO_P5,
 	//% block="P11 (B button)"
-	P11 = DAL.MICROBIT_ID_IO_P11,
+    P11 = DAL.MICROBIT_ID_IO_P11,
 }
 
 /**
@@ -43,24 +43,12 @@ enum GamerBitEvent {
  */
 //% color=#f44242 icon="\uf11b"
 namespace gamerbit {
-	let _initialized: boolean;
+	/**
+	 * 
+	 */
+	//% shim=gamerbit::init
 	function init(): void {
-		if (_initialized) return;
-		// Button mapping
-		// P0: D-pad up
-		// P1: D-pad left
-		// P2: D-pad right
-		// P8: D-pad down
-		// P12: left button ('Y')
-		// P16: right button ('X')
-		// connectors 'A' and 'B' on back side duplicate micro:bit buttons A and B.
-		pins.setPull(DigitalPin.P0, PinPullMode.PullUp);
-		pins.setPull(DigitalPin.P1, PinPullMode.PullUp);
-		pins.setPull(DigitalPin.P2, PinPullMode.PullUp);
-		pins.setPull(DigitalPin.P8, PinPullMode.PullUp);
-		pins.setPull(DigitalPin.P12, PinPullMode.PullUp);
-		pins.setPull(DigitalPin.P16, PinPullMode.PullUp);
-		_initialized = true;
+		return;
 	}
 
 	/**
@@ -69,10 +57,10 @@ namespace gamerbit {
 	 */
 	//% weight=89
 	//% blockId=gamerbit_ispressed block="gamer:bit %button|is pressed"
-    //% button.fieldEditor="gridpicker" button.fieldOptions.columns=3
+	//% button.fieldEditor="gridpicker" button.fieldOptions.columns=3
 	export function isPressed(button: GamerBitPin): boolean {
 		init();
-		return input.pinIsPressed(<TouchPin><number>button); // enable touch mode
+		return pins.digitalReadPin(<DigitalPin><number>button) != 0; // enable touch mode
 	}
 
 	/**
@@ -80,11 +68,10 @@ namespace gamerbit {
 	 */
 	//% weight=90
 	//% blockId=gamerbit_onevent block="gamer:bit on %button|%event"
-    //% button.fieldEditor="gridpicker" button.fieldOptions.columns=3
-    //% event.fieldEditor="gridpicker" event.fieldOptions.columns=3
+	//% button.fieldEditor="gridpicker" button.fieldOptions.columns=3
+	//% event.fieldEditor="gridpicker" event.fieldOptions.columns=3
 	export function onEvent(button: GamerBitPin, event: GamerBitEvent, handler: Action) {
-		init(); // setting pullup
-		input.pinIsPressed(<TouchPin><number>button); // enable touch mode
+		init();
 		control.onEvent(<number>button, <number>event, handler); // register handler
 	}
 }
