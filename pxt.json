@@ -8,7 +8,10 @@
     },
     "files": [
         "README.md",
-        "gamerbit.ts"
+        "gamerbit.cpp",
+        "gamerbit.ts",
+        "shims.d.ts",
+        "enums.d.ts"
     ],
     "testFiles": [
         "test.ts"
