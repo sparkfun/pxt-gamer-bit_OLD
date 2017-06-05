@@ -6,7 +6,7 @@ namespace gamerbit {
 
     //%
     void init() {
-        if (!initialized) return;
+        if (initialized) return;
 
     // mount buttons on the pins with a pullup mode
     // TODO: fix this issue in the DAL itself
