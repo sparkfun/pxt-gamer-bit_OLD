@@ -32,10 +32,6 @@ enum GamerBitEvent {
 	Up = DAL.MICROBIT_BUTTON_EVT_UP,
 	//% block="click"
 	Click = DAL.MICROBIT_BUTTON_EVT_CLICK,
-	//% block="double click"
-	DoubleClick = DAL.MICROBIT_BUTTON_EVT_DOUBLE_CLICK,
-	//% block="long click"
-	LongClick = DAL.MICROBIT_BUTTON_EVT_LONG_CLICK,
 }
 
 /**

@@ -8,7 +8,7 @@ Not currently integrated into pxt.  It must be manually added.  This package is 
 
 ## Usage
 
-The package adds support for the gamer:bit add-on board from SparkFun.
+The package adds support for the **gamer:bit** add-on board from SparkFun.
 
 * Button pins are named to function.
 * Provides button state detection block.
@@ -19,16 +19,14 @@ The package adds support for the gamer:bit add-on board from SparkFun.
 
 The micro:bit pins are named to match gamepad functions:
 
-* P0 -- D-PAD up
-* P1 -- D-PAD left
-* P2 -- D-PAD right
-* P8 -- D-PAD down
-* P12 -- Y button (right-hand, left button)
-* P16 -- X button (right-hand, right button)
-* P5 -- A button (micro:bit, left button)
-* P11 -- B button (micro:bit, right button)
-
-### Initalization
+* ``P0`` -- D-PAD up
+* ``P1`` -- D-PAD left
+* ``P2`` -- D-PAD right
+* ``P8`` -- D-PAD down
+* ``P12`` -- Y button (right-hand, left button)
+* ``P16`` -- X button (right-hand, right button)
+* ``P5`` -- A button (micro:bit, left button)
+* ``P11`` -- B button (micro:bit, right button)
 
 The button pins are automatically configured as pull-up when using the package.
 
@@ -55,8 +53,6 @@ They can be triggered on:
 * down (pressed)
 * up (released)
 * clicked (pressed then released)
-* double clicked
-* long click (TODO: how long is this?)
 
 ```blocks
 gamerbit.onEvent(GamerBitPin.P0, GamerBitEvent.Down, () => {
@@ -69,7 +65,35 @@ gamerbit.onEvent(GamerBitPin.P0, GamerBitEvent.Up, () => {
 
 *Example turns on LED when button is pressed*
 
-## Example: Sending a packet of data over wireless
+## Examples
+
+### Example: Remote controlled a microservo
+
+This program uses the left, right, up buttons
+and sends the servo angle over radio.
+
+```blocks
+// gamer:bit code
+gamerbit.onEvent(GamerBitPin.P0, GamerBitEvent.Down, () => {
+    // go straight
+    radio.sendNumber(90)
+});
+gamerbit.onEvent(GamerBitPin.P1, GamerBitEvent.Down, () => {
+    // turn left
+    radio.sendNumber(45)
+});
+gamerbit.onEvent(GamerBitPin.P2, GamerBitEvent.Down, () => {
+    // turn right
+    radio.sendNumber(135)
+});
+
+// robot code
+radio.onDataPacketReceived( ({ receivedNumber }) =>  {
+    pins.servoWritePin(AnalogPin.P0, receivedNumber)
+})
+```
+
+### Example: Sending a packet of data over wireless
 
 The following program assembles a string that reflects the states of the buttons and ships it out over the air.
 
