@@ -39,6 +39,7 @@ enum GamerBitEvent {
  */
 //% color=#f44242 icon="\uf11b"
 namespace gamerbit {
+	declare var pullsInitialized: number;
 	/**
 	 * 
 	 */
@@ -46,7 +47,25 @@ namespace gamerbit {
 	function init(): void {
 		return;
 	}
-
+	
+	/**
+	 * 
+	 */
+	//%
+	function configurePulls(): void {
+        if (pullsInitialized == 1) return;
+		pins.setPull(DigitalPin.P0, PinPullMode.PullUp);
+		pins.setPull(DigitalPin.P1, PinPullMode.PullUp);
+		pins.setPull(DigitalPin.P2, PinPullMode.PullUp);
+		pins.setPull(DigitalPin.P8, PinPullMode.PullUp);
+		pins.setPull(DigitalPin.P12, PinPullMode.PullUp);
+		pins.setPull(DigitalPin.P16, PinPullMode.PullUp);
+		pins.setPull(DigitalPin.P5, PinPullMode.PullUp);
+		pins.setPull(DigitalPin.P11, PinPullMode.PullUp);
+		pullsInitialized = 1;
+		return;
+	}
+	
 	/**
 	 * 
 	 * @param button the pin that acts as a button
@@ -55,8 +74,16 @@ namespace gamerbit {
 	//% blockId=gamerbit_ispressed block="gamer:bit %button|is pressed"
 	//% button.fieldEditor="gridpicker" button.fieldOptions.columns=3
 	export function isPressed(button: GamerBitPin): boolean {
-		init();
-		return pins.digitalReadPin(<DigitalPin><number>button) != 0; // enable touch mode
+		configurePulls();
+		if(pins.digitalReadPin(<DigitalPin><number>button) == 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+//		return pins.digitalReadPin(<DigitalPin><number>button) != 0; // enable touch mode
 	}
 
 	/**

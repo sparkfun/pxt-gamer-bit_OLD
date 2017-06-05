@@ -103,56 +103,56 @@ TODO: Rework this example to use the gamer:bit blocks.
 let packet = ""
 basic.forever(() => {
     packet = ""
-    if (pins.digitalReadPin(DigitalPin.P0) == 0) {
+    if (gamerbit.isPressed(GamerBitPin.P0)) {
         led.plot(1, 0)
         packet = "" + packet + "1"
     } else {
         led.unplot(1, 0)
         packet = "" + packet + "0"
     }
-    if (pins.digitalReadPin(DigitalPin.P1) == 0) {
+    if (gamerbit.isPressed(GamerBitPin.P1)) {
         led.plot(0, 1)
         packet = "" + packet + "1"
     } else {
         led.unplot(0, 1)
         packet = "" + packet + "0"
     }
-    if (pins.digitalReadPin(DigitalPin.P2) == 0) {
+    if (gamerbit.isPressed(GamerBitPin.P2)) {
         led.plot(2, 1)
         packet = "" + packet + "1"
     } else {
         led.unplot(2, 1)
         packet = "" + packet + "0"
     }
-    if (pins.digitalReadPin(DigitalPin.P8) == 0) {
+    if (gamerbit.isPressed(GamerBitPin.P8)) {
         led.plot(1, 2)
         packet = "" + packet + "1"
     } else {
         led.unplot(1, 2)
         packet = "" + packet + "0"
     }
-    if (pins.digitalReadPin(DigitalPin.P12) == 0) {
+    if (gamerbit.isPressed(GamerBitPin.P12)) {
         led.plot(3, 2)
         packet = "" + packet + "1"
     } else {
         led.unplot(3, 2)
         packet = "" + packet + "0"
     }
-    if (pins.digitalReadPin(DigitalPin.P16) == 0) {
+    if (gamerbit.isPressed(GamerBitPin.P16)) {
         led.plot(4, 2)
         packet = "" + packet + "1"
     } else {
         led.unplot(4, 2)
         packet = "" + packet + "0"
     }
-    if (pins.digitalReadPin(DigitalPin.P5) == 0) {
+    if (gamerbit.isPressed(GamerBitPin.P5)) {
         led.plot(3, 0)
         packet = "" + packet + "1"
     } else {
         led.unplot(3, 0)
         packet = "" + packet + "0"
     }
-    if (pins.digitalReadPin(DigitalPin.P11) == 0) {
+    if (gamerbit.isPressed(GamerBitPin.P11)) {
         led.plot(4, 0)
         packet = "" + packet + "1"
     } else {
@@ -161,14 +161,6 @@ basic.forever(() => {
     }
     radio.sendString(packet)
 })
-pins.setPull(DigitalPin.P0, PinPullMode.PullUp)
-pins.setPull(DigitalPin.P1, PinPullMode.PullUp)
-pins.setPull(DigitalPin.P2, PinPullMode.PullUp)
-pins.setPull(DigitalPin.P8, PinPullMode.PullUp)
-pins.setPull(DigitalPin.P12, PinPullMode.PullUp)
-pins.setPull(DigitalPin.P16, PinPullMode.PullUp)
-pins.setPull(DigitalPin.P5, PinPullMode.PullUp)
-pins.setPull(DigitalPin.P11, PinPullMode.PullUp)
 radio.setGroup(13)
 ```
 
